@@ -19,7 +19,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
 \ProcessOptions\relax
 % 引用ctexart及基本设置
-\LoadClass[a4paper,UTF8,titlepage]{ctexart}
+\LoadClass[a4paper,UTF8,titlepage,zihao=-4]{ctexart}
 
 %%%%%%%%%% 宏包 %%%%%%%%%%
 % 全局通用宏包
@@ -245,7 +245,7 @@
 \bibpunct{[}{]}{,}{n}{}{}
 \setlength{\bibsep}{0pt}
 \newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
-\renewcommand{\refname}{主要参考文献}
+
 \RequirePackage{gbt7714}
 \citestyle{numerical}
 
@@ -294,11 +294,59 @@
 
 
 %%%%%%%%%% 标题 %%%%%%%%%%
-\renewcommand{\contentsname}{目\qquad 录}
-\renewcommand{\listfigurename}{图\qquad 目}
-\renewcommand{\listtablename}{表\qquad 目}
+\renewcommand{\contentsname}{\hspace*{\fill} 目\qquad 录 \hspace*{\fill}}
+\renewcommand{\listfigurename}{\hspace*{\fill}  图\qquad 目 \hspace*{\fill}}
+\renewcommand{\listtablename}{\hspace*{\fill}  表\qquad 目 \hspace*{\fill}}
+\renewcommand{\bibname}{主要参考文献}
+\renewcommand{\refname}{\hspace*{\fill} \bibname \hspace*{\fill}}
+
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
+
+% 格式
+\ctexset{
+    section={
+        format={\zihao{3}\heiti},
+        aftername={\quad},
+        beforeskip={.5\baselineskip},
+        afterskip={.5\baselineskip},
+    },
+    subsection={
+        format={\zihao{-3}\heiti},
+        aftername={\quad},
+        beforeskip={.5\baselineskip},
+        afterskip={.5\baselineskip},
+    },
+    subsubsection={
+        format={\zihao{4}\heiti},
+        aftername={\quad},
+        beforeskip={.5\baselineskip},
+        afterskip={.5\baselineskip},
+    },
+    section/break={}
+}
+
+% 取消强制换页
+% \renewcommand{\clearpage}{\par}
+
+%%%%%%%%%% 目录 %%%%%%%%%%
+\RequirePackage{titletoc}
+
+% 表目录图目录的格式设置
+% 表目录与图目录数字前增加“表”与“图”字，并且使目录行间距与section行间距一致
+\titlecontents{figure}[0pt]{\vspace{0.15\baselineskip}\songti\zihao{-4}}{\makebox[3em][l]{图~\thecontentslabel\quad}}{}
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}[\vspace{0.15\baselineskip}]
+
+\titlecontents{table}[0pt]{\vspace{0.15\baselineskip}\songti\zihao{-4}}{\makebox[3em][l]{表~\thecontentslabel\quad}}{}
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}[\vspace{0.15\baselineskip}]
+
+\DeclareMathOperator*{\Bigcdot}{\scalerel*{\cdot}{\bigodot}}
+\titlecontents{section}[0em]{\bfseries \songti\zihao{-4}}{\thecontentslabel\quad}{}
+    {\hspace{.5em}\titlerule*[5pt]{$\boldsymbol{\cdot}$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
+\titlecontents{subsection}[2em]{\vspace{-0.2\baselineskip}\songti\zihao{-4}}{\thecontentslabel\quad}{}
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
+\titlecontents{subsubsection}[4em]{\vspace{-0.2\baselineskip}\songti\zihao{-4}}{\thecontentslabel\quad}{}
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
 
 
 %%%%%%%%%% 图表 %%%%%%%%%%
@@ -358,9 +406,15 @@
 
 
 %%%%%%%%%% 附录 %%%%%%%%%%
-\RequirePackage{appendix}
-\renewcommand\appendix{\par
+\RequirePackage[toc,page]{appendix}
+
+\renewcommand{\appendix}{
+    \newpage
     \setcounter{section}{0}
     \setcounter{subsection}{0}
-    \gdef\thesection{附录 \Alph{section}}
+
+    \renewcommand{\tablename}{附表}
+    \renewcommand{\figurename}{附图}
+    \renewcommand{\thesection}{附录 \Alph{section}}
 }
+
