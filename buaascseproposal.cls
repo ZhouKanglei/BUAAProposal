@@ -215,7 +215,7 @@
 	        指导教师： & \buaaattutor \\ \cline{2-2}
 	        \end{tabular} \par}
 	        \vspace{3cm} 
-	        {\linespread{1.5} \sanhao \heiti \buaaatuniversity \buaaatschool \par 
+	        {\sanhao \heiti \buaaatuniversity \buaaatschool \par 
 	        \heiti \@date \par }
 	    \end{center}
 	    \vspace{\fill}
