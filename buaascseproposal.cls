@@ -29,6 +29,7 @@
 \RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
 \RequirePackage{txfonts}
+\RequirePackage{anyfontsize}
 
 \setmainfont{Times New Roman}
 \let\songti\relax
@@ -233,7 +234,7 @@
 }
 
 %%%%%%%%%% cross reference %%%%%%%%%%
-\RequirePackage[xetex,unicode]{hyperref}
+\RequirePackage{hyperref}
 \ifbuaaatcolor
     \hypersetup{colorlinks, linkcolor=blue}
 \else
@@ -304,9 +305,13 @@
 
 
 %%%%%%%%%% 标题 %%%%%%%%%%
-\renewcommand{\contentsname}{\hspace*{\fill} 目\qquad 录 \hspace*{\fill}}
-\renewcommand{\listfigurename}{\hspace*{\fill}  图\qquad 目 \hspace*{\fill}}
-\renewcommand{\listtablename}{\hspace*{\fill}  表\qquad 目 \hspace*{\fill}}
+\newcommand{\contentname}{目~~~~~~~~录}
+\newcommand{\figurecontentname}{图~~~~~~~~目}
+\newcommand{\tablecontentname}{表~~~~~~~~目}
+
+\renewcommand{\contentsname}{\centerline{\contentname}}
+\renewcommand{\listfigurename}{\centerline{\figurecontentname}}
+\renewcommand{\listtablename}{\centerline{\tablecontentname}}
 \renewcommand{\bibname}{主要参考文献}
 \renewcommand{\refname}{\hspace*{\fill} \bibname \hspace*{\fill}}
 
@@ -430,7 +435,7 @@
 
 %%%%%%%%%% 摘要 %%%%%%%%%%
 % 中文摘要
-\newcommand{\cabstractname}{摘\qquad  要}
+\newcommand{\cabstractname}{摘~~~~~~~~要}
 \newenvironment{cabstract}{%
     \vspace{5ex}
     \centerline{\heiti\zihao{3} \cabstractname}
