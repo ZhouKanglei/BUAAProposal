@@ -108,18 +108,28 @@
 \newcommand{\stuno}[1]{%
     \gdef\buaaatstuno{#1}
 }
+% 中文关键词
+\gdef\buaaatckeyword{中文关键词}
+\newcommand{\ckeyword}[1]{%
+    \gdef\buaaatckeyword{#1}
+}
+% 英文关键词
+\gdef\buaaatekeyword{English key words}
+\newcommand{\ekeyword}[1]{%
+    \gdef\buaaatekeyword{#1}
+}
 
 
 \ifbuaaatdoctor
-	\gdef\buaaatdegree{博士}
+    \gdef\buaaatdegree{博士}
 \else
-	\gdef\buaaatdegree{硕士}
+    \gdef\buaaatdegree{硕士}
 \fi
 
 \ifbuaaatproposal
-	\gdef\buaaatdoctype{开题报告}
+    \gdef\buaaatdoctype{开题报告}
 \else
-	\gdef\buaaatdoctype{文献综述}
+    \gdef\buaaatdoctype{文献综述}
 \fi
 
 %%%%%%%%%% 页面设置 %%%%%%%%%%
@@ -148,8 +158,8 @@
     \f@nch@compatViiitrue
 
 \fancypagestyle{frontmatter}{
-	\fancyhead{}
-	\fancyfoot{}
+    \fancyhead{}
+    \fancyfoot{}
     \pagenumbering{roman}
 
     \fancyhead[L]{\zihao{-5}\hwkaiti
@@ -168,10 +178,10 @@
 }
 
 \fancypagestyle{mainmatter}{
-	\fancyhead{}
-	\fancyfoot{}
+    \fancyhead{}
+    \fancyfoot{}
     \setcounter{page}{1}
-	\pagenumbering{arabic}
+    \pagenumbering{arabic}
 
     \fancyhead[L]{\zihao{-5}\hwkaiti
         \buaaatthesistitle \vspace{1.5mm}
@@ -197,29 +207,29 @@
 \RequirePackage{booktabs}
 \RequirePackage{titling}
 \renewcommand*\maketitle{
-	\begin{titlepage}
+    \begin{titlepage}
         \linespread{1.2}
-		\vspace*{\fill}
-	    \begin{center}
-	    	{\xiaoer \bfseries \hwkaiti \buaaatuniversity \buaaatschool \par}
-	    	\vspace{3cm}
-	        {\yihao \bfseries \heiti \buaaatdegree 研究生学位论文 \par \buaaatdoctype \par} 
-	        \vspace{4cm} 
-	        {\xiaosan \hwkaiti \linespread{1.5}
-	        \begin{tabular}{rc}
-	        论文题目： & \buaaatthesistitle \\ \cline{2-2}
-	        专~~~~~~~~业： & \buaaatmajor \\ \cline{2-2}
-	        研究方向： & \buaaatdirection \\ \cline{2-2}
-	        研~~究~~生： & \buaaatauthorname \\ \cline{2-2}
-	        学~~~~~~~~号： & \buaaatstuno \\ \cline{2-2}
-	        指导教师： & \buaaattutor \\ \cline{2-2}
-	        \end{tabular} \par}
-	        \vspace{3cm} 
-	        {\sanhao \heiti \buaaatuniversity \buaaatschool \par 
-	        \heiti \@date \par }
-	    \end{center}
-	    \vspace{\fill}
-	\end{titlepage}
+        \vspace*{\fill}
+        \begin{center}
+            {\xiaoer \bfseries \hwkaiti \buaaatuniversity \buaaatschool \par}
+            \vspace{3cm}
+            {\yihao \bfseries \heiti \buaaatdegree 研究生学位论文 \par \buaaatdoctype \par} 
+            \vspace{4cm} 
+            {\xiaosan \hwkaiti \linespread{1.5}
+            \begin{tabular}{rc}
+            论文题目： & \buaaatthesistitle \\ \cline{2-2}
+            专~~~~~~~~业： & \buaaatmajor \\ \cline{2-2}
+            研究方向： & \buaaatdirection \\ \cline{2-2}
+            研~~究~~生： & \buaaatauthorname \\ \cline{2-2}
+            学~~~~~~~~号： & \buaaatstuno \\ \cline{2-2}
+            指导教师： & \buaaattutor \\ \cline{2-2}
+            \end{tabular} \par}
+            \vspace{3cm} 
+            {\sanhao \heiti \buaaatuniversity \buaaatschool \par 
+            \heiti \@date \par }
+        \end{center}
+        \vspace{\fill}
+    \end{titlepage}
 }
 
 %%%%%%%%%% cross reference %%%%%%%%%%
@@ -416,5 +426,30 @@
     \renewcommand{\tablename}{附表}
     \renewcommand{\figurename}{附图}
     \renewcommand{\thesection}{附录 \Alph{section}}
+}
+
+%%%%%%%%%% 摘要 %%%%%%%%%%
+% 中文摘要
+\newcommand{\cabstractname}{摘\qquad  要}
+\newenvironment{cabstract}{%
+    \vspace{5ex}
+    \centerline{\heiti\zihao{3} \cabstractname}
+    \vspace{5ex}
+    \setlength{\parindent}{24bp}
+    }{%
+    \vskip 21bp
+    {\heiti\zihao{-4} 关键词：} \heiti\buaaatckeyword
+}
+
+% 英文摘要
+\newcommand{\eabstractname}{Abstract}
+\newenvironment{eabstract}{%
+    \vspace{5ex}
+    \centerline{\bfseries \zihao{3} \eabstractname}
+    \vspace{5ex}
+    \setlength{\parindent}{24bp}
+    }{%
+    \vskip 21bp
+    {\bfseries \zihao{-4} Key words: } \buaaatekeyword
 }
 
