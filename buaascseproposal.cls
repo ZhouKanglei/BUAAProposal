@@ -443,7 +443,7 @@
     \setlength{\parindent}{24bp}
     }{%
     \vskip 21bp
-    {\heiti\zihao{-4} 关键词：} \heiti\buaaatckeyword
+    {\heiti\zihao{-4} 关键词：} \buaaatckeyword
 }
 
 % 英文摘要
