@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%% 模板声明 %%%%%%%%%%%%%%%%% 
 \NeedsTeXFormat{LaTeX2e}[2007/10/19]
 \ProvidesClass{buaascseproposal}[The LaTeX template for thesis proposal of SCSE, BUAA]
-\typeout{Document Class `buaascseproposal' v0.1 by ZKL (2022/07/01)}
+\typeout{Document Class `buaascseproposal' v0.1 by ZKL (2022/11/18)}
 
 %%%%%%%%%%%%%%%%% 模板选项 %%%%%%%%%%%%%%%%% 
 \newif\ifbuaaatmaster\buaaatmasterfalse
@@ -207,6 +207,7 @@
 %%%%%%%%%% 封面 %%%%%%%%%%
 \RequirePackage{booktabs}
 \RequirePackage{titling}
+\RequirePackage{makecell}
 \renewcommand*\maketitle{
     \begin{titlepage}
         \linespread{1.2}
@@ -217,7 +218,7 @@
             {\yihao \bfseries \heiti \buaaatdegree 研究生学位论文 \par \buaaatdoctype \par} 
             \vspace{4cm} 
             {\xiaosan \hwkaiti \linespread{1.5}
-            \begin{tabular}{rc}
+            \begin{tabular}{lp{8cm}<{\centering}} % 8cm是单元格宽度，如果希望换行垂直居中则改为lm{8cm}<{\centering}
             论文题目： & \buaaatthesistitle \\ \cline{2-2}
             专~~~~~~~~业： & \buaaatmajor \\ \cline{2-2}
             研究方向： & \buaaatdirection \\ \cline{2-2}
@@ -402,22 +403,23 @@
 
 %%%%%%%%%% 交叉引用 %%%%%%%%%%
 \RequirePackage{tcolorbox}
-\RequirePackage{minted}
 \RequirePackage{xcolor}
 \definecolor{Gray}{gray}{0.85}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
 
-\setminted{
-  frame=single,
-  bgcolor=bg,
-  breaklines=true,
-  breakanywhere=true,
-  linenos,
-  tabsize=4,
-  tabcolor=black,
-  encoding=utf8
-}
+% 有的环境下会报错：You must invoke LaTeX with the -shell-escape flag. [\setminted]，暂未解决
+% \RequirePackage{minted}
+% \setminted{
+%   frame=single,
+%   bgcolor=bg,
+%   breaklines=true,
+%   breakanywhere=true,
+%   linenos,
+%   tabsize=4,
+%   tabcolor=black,
+%   encoding=utf8
+% }
 
 
 %%%%%%%%%% 附录 %%%%%%%%%%
@@ -457,4 +459,3 @@
     \vskip 21bp
     {\bfseries \zihao{-4} Key words: } \buaaatekeyword
 }
-
