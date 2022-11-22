@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%% 模板声明 %%%%%%%%%%%%%%%%% 
 \NeedsTeXFormat{LaTeX2e}[2007/10/19]
 \ProvidesClass{buaascseproposal}[The LaTeX template for thesis proposal of SCSE, BUAA]
-\typeout{Document Class `buaascseproposal' v0.1 by ZKL (2022/11/18)}
+\typeout{Document Class `buaascseproposal' v0.1 by ZKL (2022/07/01)}
 
 %%%%%%%%%%%%%%%%% 模板选项 %%%%%%%%%%%%%%%%% 
 \newif\ifbuaaatmaster\buaaatmasterfalse
@@ -26,9 +26,10 @@
 \RequirePackage{ifthen}
 
 % 数学相关和字体设置
-\RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm}
+\RequirePackage{amsmath,amssymb,amsfonts,mathrsfs,bm,bbm}
+% \RequirePackage{mathptmx}
 \RequirePackage[amsmath,thmmarks,hyperref]{ntheorem}
-\RequirePackage{txfonts}
+% \RequirePackage{txfonts}
 \RequirePackage{anyfontsize}
 
 \setmainfont{Times New Roman}
@@ -66,6 +67,7 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{rowgray}{gray}{0.5}
 
 
 %%%%%%%%%% 学生信息 %%%%%%%%%%
@@ -148,8 +150,14 @@
 }
 \savegeometry{custompagesize}
 
-\loadgeometry{custompagesize}
+\loadgeometry{a4pagesize}
 
+%%%%%%%%%% 其他间距 %%%%%%%%%%
+\renewcommand{\baselinestretch}{1.625}
+\setlength{\parindent}{2em}
+\setlength{\floatsep}{3pt plus 3pt minus 2pt}      % 图形之间或图形与正文之间的距离
+\setlength{\abovecaptionskip}{10pt plus 1pt minus 1pt} % 图形中的图与标题之间的距离
+\setlength{\belowcaptionskip}{3pt plus 1pt minus 2pt} % 表格中的表与标题之间的距离
 
 % 页眉页脚
 \RequirePackage{fancyhdr}
@@ -168,7 +176,7 @@
     }
     \fancyfoot[C]{
         \hspace{1.5mm}
-        \hwkaiti\zihao{-5}\buaaatuniversity\buaaatschool\buaaatdegree\buaaatdoctype
+        \hwkaiti\zihao{-5}\buaaatuniversity\buaaatschool\buaaatdegree 学位论文\buaaatdoctype
         \hfill\hfill
         \songti\zihao{-5}$\cdot$\quad\thepage\quad$\cdot$
         \hspace{1.5mm}
@@ -189,7 +197,7 @@
     }
     \fancyfoot[C]{
         \hspace{1.5mm}
-        \hwkaiti\zihao{-5}\buaaatuniversity\buaaatschool\buaaatdegree\buaaatdoctype
+        \hwkaiti\zihao{-5}\buaaatuniversity\buaaatschool\buaaatdegree 学位论文\buaaatdoctype
         \hfill\hfill
         \songti\zihao{-5}$\cdot$\quad\thepage\quad$\cdot$
         \hspace{1.5mm}
@@ -325,22 +333,41 @@
         format={\zihao{3}\heiti},
         aftername={\quad},
         beforeskip={.5\baselineskip},
-        afterskip={.5\baselineskip},
+        afterskip={.25\baselineskip},
     },
     subsection={
         format={\zihao{-3}\heiti},
         aftername={\quad},
-        beforeskip={.5\baselineskip},
-        afterskip={.5\baselineskip},
+        beforeskip={.25\baselineskip},
+        afterskip={.25\baselineskip},
     },
     subsubsection={
         format={\zihao{4}\heiti},
         aftername={\quad},
-        beforeskip={.5\baselineskip},
-        afterskip={.5\baselineskip},
+        beforeskip={.25\baselineskip},
+        afterskip={.25\baselineskip},
     },
-    section/break={}
+    section/break={},
+    paragraph={
+        % format={\bfseries \zihao{-4}\songti},
+        beforeskip={.0\baselineskip},
+        indent={2em} 
+    }
 }
+
+
+%%%%%%%%% 公式 %%%%%%%%%%
+\newcommand{\splitatcommas}[1]{%
+  \begingroup
+  \begingroup\lccode`~=`, \lowercase{\endgroup
+    \edef~{\mathchar\the\mathcode`, \penalty0 \noexpand\hspace{0pt plus 1em}}%
+  }\mathcode`,="8000 #1%
+  \endgroup
+}
+
+%%%%%%%%% 公式 %%%%%%%%%%
+\newcommand{\bfemph}[1]{\textbf{#1}}
+% \renewcommand{\emph}[1]{\bfemph{#1}}
 
 % 取消强制换页
 % \renewcommand{\clearpage}{\par}
@@ -352,23 +379,23 @@
 % 表目录与图目录数字前增加“表”与“图”字，并且使目录行间距与section行间距一致
 \titlecontents{figure}[0pt]{\vspace{0.15\baselineskip}\songti\zihao{-4}}{\makebox[3em][l]{图~\thecontentslabel\quad}}{}
     {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}[\vspace{0.15\baselineskip}]
-
 \titlecontents{table}[0pt]{\vspace{0.15\baselineskip}\songti\zihao{-4}}{\makebox[3em][l]{表~\thecontentslabel\quad}}{}
     {\hspace{.5em}\titlerule*[4pt]{$\cdot$}\contentspage}[\vspace{0.15\baselineskip}]
 
 \DeclareMathOperator*{\Bigcdot}{\scalerel*{\cdot}{\bigodot}}
 \titlecontents{section}[0em]{\bfseries \songti\zihao{-4}}{\thecontentslabel\quad}{}
-    {\hspace{.5em}\titlerule*[5pt]{$\boldsymbol{\cdot}$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
+    {\hspace{.5em}\titlerule*[5pt]{$\boldsymbol{\cdot}$}{\zihao{-4}\contentspage}}[\vspace{0.15\baselineskip}]
 \titlecontents{subsection}[2em]{\vspace{-0.2\baselineskip}\songti\zihao{-4}}{\thecontentslabel\quad}{}
-    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.15\baselineskip}]
 \titlecontents{subsubsection}[4em]{\vspace{-0.2\baselineskip}\songti\zihao{-4}}{\thecontentslabel\quad}{}
-    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.1\baselineskip}]
+    {\hspace{.5em}\titlerule*[4pt]{$\cdot$}{\zihao{-4}\contentspage}}[\vspace{0.15\baselineskip}]
 
 
-%%%%%%%%%% 图表 %%%%%%%%%%
+%%%%%%%%%% 图 %%%%%%%%%%
 \RequirePackage{graphicx}
 \graphicspath{{./figs/}{./fig/}{./figures/}{./figure/}}
 \RequirePackage{pifont}  % “秘级”后的五角星
+\RequirePackage{overpic}
 \RequirePackage{subfigure}
 \RequirePackage{booktabs}
 \RequirePackage{caption}
@@ -382,18 +409,51 @@
   position=top, margin=0mm, font=kai,
   aboveskip=0pt, belowskip=0pt, justification=centerlast}
 
-
+%%%%%%%%%% 表 %%%%%%%%%%
 \RequirePackage{makecell}
 \RequirePackage{colortbl}
 \RequirePackage{enumerate}
 \RequirePackage{ulem}
 
+% 长表格
+\RequirePackage{longtable}
+
+% 表格中的行合并
+\RequirePackage{multirow}
+
+% 重定义table/tabular/tabularx环境，使表格内为5号字
+% TODO(huxuan): 支持 longtable
+\let\oldtable\table
+\let\endoldtable\endtable
+\renewenvironment{table}[1][!ht]
+{\renewcommand{\arraystretch}{1}
+\oldtable[#1] \zihao{5}}
+{\renewcommand{\arraystretch}{1}
+\endoldtable}
+
+% \let\oldtabular\tabular
+% \let\endoldtabular\endtabular
+% \renewenvironment{tabular}[1][h!]
+% {\renewcommand{\arraystretch}{1.5}
+% \oldtabular[#1] \zihao{5}}
+% {\renewcommand{\arraystretch}{1}
+% \endoldtabular}
+
+\RequirePackage{tabularx}
+% \let\oldtabularx\tabularx
+% \let\endoldtabularx\endtabularx
+% \renewenvironment{tabularx}[2]
+% {\renewcommand{\arraystretch}{1.5}
+% \zihao{5}\oldtabularx{#1}{#2}}
+% {\renewcommand{\arraystretch}{1}
+% \endoldtabularx}
+
 %%%%%%%%%% 列表 %%%%%%%%%%
 \RequirePackage{enumitem}
 \setlist{noitemsep}
 \setlist[1,2]{labelindent=\parindent}
-\setlist[enumerate,1]{label=\arabic*、}
-\setlist[enumerate,2]{label=（\arabic*）}
+\setlist[enumerate,1]{wide, label=（\arabic*）, labelsep=0pt, noitemsep}
+\setlist[enumerate,2]{label=\arabic*）}
 \setlist{
     topsep=0pt,
     itemsep=0pt,
@@ -408,7 +468,6 @@
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
 
-% 有的环境下会报错：You must invoke LaTeX with the -shell-escape flag. [\setminted]，暂未解决
 % \RequirePackage{minted}
 % \setminted{
 %   frame=single,
