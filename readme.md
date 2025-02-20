@@ -12,3 +12,5 @@
 - proposal/review：开题报告/文献综述
 
 [Overleaf 在线编辑](https://www.overleaf.com/latex/templates/buaa-proposal-template/xtkhsqhrwgjw)
+
+推荐使用[一个 LaTeX 中 Beamer 风格的 Powpoint 模版](https://github.com/ZhouKanglei/BUAA-PPT)
